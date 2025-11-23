@@ -10,7 +10,7 @@ export default async function RecipeDetails({ params }) {
   });
   if (!res.ok) return notFound();
   const recipe = await res.json();
-//   console.log(recipe);
+  console.log(recipe);
 
   return (
     <div className="mt-12">
@@ -24,9 +24,9 @@ export default async function RecipeDetails({ params }) {
           Back to Recipes
         </Link>
       </div>
-      <div className="w-10/12 mx-auto px-6 flex justify-between gap-12">
+      <div className="w-10/12 mx-auto px-6">
         {/* image  */}
-        <div className="relative w-8/12 h-auto rounded-2xl overflow-hidden shadow-lg mb-10">
+        <div className="relative w-full md:min-h-[800] min-h-[300] rounded-2xl overflow-hidden shadow-lg mb-10">
           <Image
             src={recipe.image}
             alt={recipe.name}
