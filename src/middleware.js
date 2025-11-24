@@ -1,0 +1,16 @@
+// src/middleware.js
+import { withAuth } from "next-auth/middleware";
+
+export default withAuth({
+  pages: {
+    signIn: "/login", // session না থাকলে redirect হবে
+  },
+});
+
+export const config = {
+  matcher: [
+    "/dashboard",
+    "/addRecipes",
+    "/manageRecipes",
+  ],
+};

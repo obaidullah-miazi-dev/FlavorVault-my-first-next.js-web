@@ -1,9 +1,13 @@
+'use client';
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Button from "./Button";
+import { useSession, signOut } from "next-auth/react";
 
 const Navbar = () => {
+  const { data: session } = useSession();
+  console.log(session);
   return (
     <nav className="py-2 flex items-center w-10/12 mx-auto justify-between">
       <Image src="/images/Logo.png" alt="logo" width={80} height={80} />
@@ -12,8 +16,17 @@ const Navbar = () => {
         <Link href="/recipes">Recipes</Link>
         <Link href="/addRecipes">Add Recipes</Link>
         {/* <Link href="/manageRecipes">Manage Recipes</Link> */}
-        <Link href='/login'><Button className={`rounded-full`}>Log In</Button></Link>
-        <Link href='/register'><Button className={`rounded-full`}>Register</Button></Link>
+        {
+          session? <>
+            <Link href="/manageRecipes">Manage Recipes</Link>
+            <button 
+            className="bg-orange-600 text-white px-5 py-2 cursor-pointer rounded-full"
+            onClick={() => signOut()}>Log Out</button>
+          </>: <>
+            <Link href='/login'><Button className="rounded-full">Log In</Button></Link>
+            <Link href='/register'><Button className="rounded-full">Register</Button></Link>
+          </>
+        }
       </div>
     </nav>
   );
