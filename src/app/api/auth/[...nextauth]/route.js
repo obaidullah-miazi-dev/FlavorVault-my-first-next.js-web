@@ -4,13 +4,12 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import clientPromise from "@/lib/mongo";
 import bcrypt from "bcrypt";
 
-const handler = NextAuth({
+export const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
-
     CredentialsProvider({
       name: "Credentials",
       async authorize(credentials) {
@@ -19,36 +18,28 @@ const handler = NextAuth({
         const users = db.collection("users");
 
         const user = await users.findOne({ email: credentials.email });
-        if (!user) {
-          throw new Error("No user found with this email");
-        }
+        if (!user) throw new Error("No user found with this email");
 
-        const isValid = await bcrypt.compare(
-          credentials.password,
-          user.password
-        );
+        const isValid = await bcrypt.compare(credentials.password, user.password);
+        if (!isValid) throw new Error("Password incorrect");
 
-        if (!isValid) {
-          throw new Error("Password incorrect");
-        }
-
-        return {
-          id: user._id,
-          name: user.name,
-          email: user.email,
-        };
+        return { id: user._id.toString(), name: user.name, email: user.email };
       },
     }),
   ],
-
   secret: process.env.NEXTAUTH_SECRET,
-
+  session: { strategy: "jwt" },
+  pages: {
+    signIn: "/login",
+  },
   callbacks: {
     async session({ session, token }) {
       session.user.id = token.sub;
       return session;
     },
   },
-});
+};
 
+// NextAuth route handler
+const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
