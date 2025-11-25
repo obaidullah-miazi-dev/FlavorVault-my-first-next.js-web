@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 w-11/12 mx-auto rounded-t-4xl">
+    <footer className="bg-gray-900 text-gray-300 md:w-11/12 mx-auto md:rounded-t-4xl">
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Brand and Tagline */}
@@ -87,7 +87,7 @@ export default function Footer() {
               <input
                 type="email"
                 placeholder="Your email"
-                className="flex-1 px-5 py-3 rounded-full bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="flex-1 px-5 py-3 rounded-full bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 w-2/4 md:w-full"
               />
               <button className="bg-orange-600 hover:bg-orange-500 text-white p-3 rounded-full transition">
                 <Mail size={20} />
