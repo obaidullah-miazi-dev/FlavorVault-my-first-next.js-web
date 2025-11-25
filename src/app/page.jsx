@@ -1,4 +1,5 @@
 import Banner from '@/components/Banner';
+import FeaturesSection from '@/components/FeaturesSection';
 import RecentRecipesSection from '@/components/RecentRecipes';
 import React from 'react';
 
@@ -12,6 +13,7 @@ const page = () => {
     <>
       <Banner />
       <RecentRecipesSection />
+      <FeaturesSection />
     </>
   );
 };
