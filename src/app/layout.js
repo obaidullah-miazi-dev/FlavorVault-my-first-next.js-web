@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
       <body>
         <SessionProvider>
           <QueryClientProvider client={queryClient}>
-            {/* <Navbar /> */}
+            <Navbar />
             {children}
           </QueryClientProvider>
         </SessionProvider>
