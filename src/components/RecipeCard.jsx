@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, Flame, ChefHat } from "lucide-react"; // Optional: use lucide-react icons
+import { Clock } from "lucide-react";
 import Button from "./Button";
 
 const difficultyColor = {
@@ -33,7 +33,7 @@ const RecipeCard = ({ recipe }) => {
             <h3 className="text-2xl font-bold leading-tight drop-shadow-lg">
               {recipe.name}
             </h3>
-            <p className="text-sm opacity-90 mt-1">{recipe.shortDescription}</p>
+            <p className="text-sm opacity-90 mt-1 md:block hidden">{recipe.shortDescription}</p>
           </div>
 
           {/* Top-right badges */}
