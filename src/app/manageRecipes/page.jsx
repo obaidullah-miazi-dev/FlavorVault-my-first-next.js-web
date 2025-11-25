@@ -1,11 +1,41 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+'use client'
+
 import Image from "next/image";
 import Link from "next/link";
 import { Clock, Users, Flame } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
 
-export default async function ManageRecipesPage() {
-  const session = await getServerSession(authOptions);
+export default function ManageRecipesPage() {
+    const { data: session } = useSession();
+
+  const { data: myRecipes = [],refetch } = useQuery({
+    queryKey: ["myRecipes", session?.user?.email],
+    queryFn: async () => {
+      if (!session?.user?.email) return [];
+      const res = await fetch(
+        `http://localhost:4000/recipes?email=${session.user.email}`
+      );
+      return res.json();
+    },
+    enabled: !!session?.user?.email,
+  });
+
+
+  const handleDelete = async (id) =>{
+    const res = await fetch(`http://localhost:4000/deleteRecipe/${id}`,{
+       method: 'DELETE' 
+    })
+    console.log(res.ok);
+    if(res.ok){
+        refetch()
+        alert('deleted successfully')
+    }
+    else{
+        alert('operation failed')
+    }
+  }
+
 
   if (!session) {
     return (
@@ -15,17 +45,9 @@ export default async function ManageRecipesPage() {
     );
   }
 
-  const res = await fetch(
-    `http://localhost:4000/recipes?email=${session.user.email}`,
-    { cache: "no-store" }
-  );
-  const myRecipes = await res.json();
-
-
-
   return (
     <div className="min-h-screen py-12 px-6">
-      <div className="max-w-7xl mx-auto">
+      <div className="w-11/12 mx-auto">
         {/* Header */}
         <div className="text-center md:text-left mb-12">
           <h1 className="text-5xl md:text-6xl text-center font-extrabold text-gray-800 mb-4">
@@ -33,7 +55,9 @@ export default async function ManageRecipesPage() {
           </h1>
           <p className="text-xl text-gray-600 text-center">
             You have created{" "}
-            <span className="font-bold text-orange-600">{myRecipes.length}</span>{" "}
+            <span className="font-bold text-orange-600">
+              {myRecipes.length}
+            </span>{" "}
             delicious recipe{myRecipes.length !== 1 && "s"}
           </p>
         </div>
@@ -54,7 +78,7 @@ export default async function ManageRecipesPage() {
           </div>
         ) : (
           /* Recipe Grid */
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-8">
             {myRecipes.map((recipe) => (
               <div
                 key={recipe._id}
@@ -68,7 +92,6 @@ export default async function ManageRecipesPage() {
                     fill
                     className="object-cover group-hover:scale-110 transition duration-500"
                   />
-                  
                 </div>
 
                 {/* Content */}
@@ -115,13 +138,7 @@ export default async function ManageRecipesPage() {
                       View
                     </Link>
 
-                    <button
-                      className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl text-center transition"
-                    >
-                      Edit
-                    </button>
-
-                    <button className="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-xl transition">
+                    <button onClick={()=>handleDelete(recipe._id)} className="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-xl transition cursor-pointer">
                       Delete
                     </button>
                   </div>
