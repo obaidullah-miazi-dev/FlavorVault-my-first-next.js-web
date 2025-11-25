@@ -1,4 +1,5 @@
 import Banner from '@/components/Banner';
+import RecentRecipesSection from '@/components/RecentRecipes';
 import React from 'react';
 
 export const metadata = {
@@ -10,6 +11,7 @@ const page = () => {
   return (
     <>
       <Banner />
+      <RecentRecipesSection />
     </>
   );
 };
