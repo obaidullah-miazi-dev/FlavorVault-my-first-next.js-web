@@ -1,4 +1,5 @@
 "use client";
+import Footer from "@/components/Footer";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
           <QueryClientProvider client={queryClient}>
             <Navbar />
             {children}
+            <Footer />
           </QueryClientProvider>
         </SessionProvider>
       </body>
