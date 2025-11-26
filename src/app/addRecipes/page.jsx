@@ -19,7 +19,7 @@ export default function AddRecipeForm() {
   };
 
   const addIngredient = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (!ingredientInput.trim()) return;
     setIngredients([...ingredients, ingredientInput]);
     setIngredientInput("");
@@ -40,16 +40,19 @@ export default function AddRecipeForm() {
 
   const onSubmit = async (data) => {
     const finalData = {
-        ...data,
-        instructions: instructions,
-        ingredients: ingredients
-    }
+      ...data,
+      instructions: instructions,
+      ingredients: ingredients,
+    };
     try {
-      const res = await fetch("http://localhost:4000/addRecipe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(finalData),
-      });
+      const res = await fetch(
+        "https://flavorvault-server.vercel.app/addRecipe",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(finalData),
+        }
+      );
 
       if (res.ok) {
         reset();
@@ -77,13 +80,14 @@ export default function AddRecipeForm() {
               Recipe Name
             </label>
             <input
-              {...register("name",{ required: true })}
-              
+              {...register("name", { required: true })}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 outline-none focus:ring-orange-500 focus:border-transparent"
               placeholder="Recipe Name"
             />
             {errors.name && (
-              <p className="text-red-600 text-sm mt-1">Recipe Name is Required</p>
+              <p className="text-red-600 text-sm mt-1">
+                Recipe Name is Required
+              </p>
             )}
           </div>
 
@@ -93,8 +97,7 @@ export default function AddRecipeForm() {
               Short Description
             </label>
             <input
-              {...register("shortDescription",{ required: true })}
-              
+              {...register("shortDescription", { required: true })}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 outline-none focus:ring-orange-500"
               placeholder="One sentence summary"
             />
@@ -111,8 +114,7 @@ export default function AddRecipeForm() {
               Full Description
             </label>
             <textarea
-              {...register("fullDescription",{ required: true })}
-              
+              {...register("fullDescription", { required: true })}
               rows={4}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 outline-none focus:ring-orange-500"
               placeholder="Tell us more about this recipe..."
@@ -130,16 +132,13 @@ export default function AddRecipeForm() {
               Image URL
             </label>
             <input
-              {...register("image",{ required: true })}
-              
+              {...register("image", { required: true })}
               type="url"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 outline-none focus:ring-orange-500"
               placeholder="https://images.unsplash.com/..."
             />
             {errors.image && (
-              <p className="text-red-600 text-sm mt-1">
-                Image Url is Required
-              </p>
+              <p className="text-red-600 text-sm mt-1">Image Url is Required</p>
             )}
           </div>
 
@@ -149,16 +148,13 @@ export default function AddRecipeForm() {
               Your Name
             </label>
             <input
-              {...register("recipeMakerName",{ required: true })}
-              
+              {...register("recipeMakerName", { required: true })}
               type="text"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 outline-none focus:ring-orange-500"
               placeholder="Your Name"
             />
             {errors.recipeMakerName && (
-              <p className="text-red-600 text-sm mt-1">
-                Name is Required
-              </p>
+              <p className="text-red-600 text-sm mt-1">Name is Required</p>
             )}
           </div>
           {/* Your Email*/}
@@ -167,16 +163,13 @@ export default function AddRecipeForm() {
               Your Email
             </label>
             <input
-              {...register("recipeMakerEmail",{ required: true })}
-              
+              {...register("recipeMakerEmail", { required: true })}
               type="email"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 outline-none focus:ring-orange-500"
               placeholder="Your Email"
             />
             {errors.recipeMakerEmail && (
-              <p className="text-red-600 text-sm mt-1">
-                Email is Required
-              </p>
+              <p className="text-red-600 text-sm mt-1">Email is Required</p>
             )}
           </div>
         </div>
@@ -188,8 +181,7 @@ export default function AddRecipeForm() {
               Difficulty
             </label>
             <select
-              {...register("difficulty",{ required: true })}
-              
+              {...register("difficulty", { required: true })}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 outline-none focus:ring-orange-500"
             >
               <option value="Easy">Easy</option>
@@ -197,9 +189,9 @@ export default function AddRecipeForm() {
               <option value="Hard">Hard</option>
             </select>
             {errors.difficulty && (
-                <p className="text-red-500 text-sm mt-1">
-                    Difficulty is Required
-                </p>
+              <p className="text-red-500 text-sm mt-1">
+                Difficulty is Required
+              </p>
             )}
           </div>
 
@@ -209,15 +201,13 @@ export default function AddRecipeForm() {
               Cooking Time
             </label>
             <input
-              {...register("cookTime",{ required: true })}
+              {...register("cookTime", { required: true })}
               type="text"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 outline-none focus:ring-orange-500"
               placeholder="e.g. 20-30 Min"
             />
             {errors.cookTime && (
-              <p className="text-red-600 text-sm mt-1">
-                Cook Time is Required
-              </p>
+              <p className="text-red-600 text-sm mt-1">Cook Time is Required</p>
             )}
           </div>
 

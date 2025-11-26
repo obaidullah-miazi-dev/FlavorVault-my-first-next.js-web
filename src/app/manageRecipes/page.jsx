@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -7,35 +7,35 @@ import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 
 export default function ManageRecipesPage() {
-    const { data: session } = useSession();
+  const { data: session } = useSession();
 
-  const { data: myRecipes = [],refetch } = useQuery({
+  const { data: myRecipes = [], refetch } = useQuery({
     queryKey: ["myRecipes", session?.user?.email],
     queryFn: async () => {
       if (!session?.user?.email) return [];
       const res = await fetch(
-        `http://localhost:4000/recipes?email=${session.user.email}`
+        `https://flavorvault-server.vercel.app/recipes?email=${session.user.email}`
       );
       return res.json();
     },
     enabled: !!session?.user?.email,
   });
 
-
-  const handleDelete = async (id) =>{
-    const res = await fetch(`http://localhost:4000/deleteRecipe/${id}`,{
-       method: 'DELETE' 
-    })
+  const handleDelete = async (id) => {
+    const res = await fetch(
+      `https://flavorvault-server.vercel.app/deleteRecipe/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
     console.log(res.ok);
-    if(res.ok){
-        refetch()
-        alert('deleted successfully')
+    if (res.ok) {
+      refetch();
+      alert("deleted successfully");
+    } else {
+      alert("operation failed");
     }
-    else{
-        alert('operation failed')
-    }
-  }
-
+  };
 
   if (!session) {
     return (
@@ -138,7 +138,10 @@ export default function ManageRecipesPage() {
                       View
                     </Link>
 
-                    <button onClick={()=>handleDelete(recipe._id)} className="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-xl transition cursor-pointer">
+                    <button
+                      onClick={() => handleDelete(recipe._id)}
+                      className="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-xl transition cursor-pointer"
+                    >
                       Delete
                     </button>
                   </div>

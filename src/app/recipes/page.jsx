@@ -1,7 +1,7 @@
 import RecipeCard from "@/components/RecipeCard";
 
 const Recipes = async () => {
-  const res = await fetch("http://localhost:4000/recipes", {
+  const res = await fetch("https://flavorvault-server.vercel.app/recipes", {
     cache: "no-store",
   });
   const recipes = await res.json();

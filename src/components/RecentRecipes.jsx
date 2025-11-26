@@ -2,7 +2,7 @@ import Link from "next/link";
 import RecipeCard from "./RecipeCard";
 
 async function RecentRecipesSection() {
-  const res = await fetch("http://localhost:4000/recipes", {
+  const res = await fetch("https://flavorvault-server.vercel.app/recipes", {
     cache: "no-store",
   });
   const recipes = await res.json();
@@ -20,7 +20,8 @@ async function RecentRecipesSection() {
             <span className="text-orange-600"> Recipes</span>
           </h2>
           <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto">
-            Check out the latest creations from our amazing community of home cooks!
+            Check out the latest creations from our amazing community of home
+            cooks!
           </p>
         </div>
 

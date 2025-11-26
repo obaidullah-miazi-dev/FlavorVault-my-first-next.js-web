@@ -5,9 +5,12 @@ import { notFound } from "next/navigation";
 
 export default async function RecipeDetails({ params }) {
   const { id } = await params;
-  const res = await fetch(`http://localhost:4000/recipes/${id}`, {
-    cache: "no-store",
-  });
+  const res = await fetch(
+    `https://flavorvault-server.vercel.app/recipes/${id}`,
+    {
+      cache: "no-store",
+    }
+  );
   if (!res.ok) return notFound();
   const recipe = await res.json();
   console.log(recipe);
