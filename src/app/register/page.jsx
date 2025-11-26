@@ -1,9 +1,12 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -23,17 +26,28 @@ export default function RegisterPage() {
     setLoading(false);
 
     if (data.success) {
-      alert("Account created successfully! You can now log in.");
-      window.location.href = "/login";
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Account created successfully! You can now log in.",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+      router.push("/login");
     } else {
-      alert(data.error || "Something went wrong");
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: data.error || "Something went wrong",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   }
 
   return (
     <div className="min-h-screen flex items-center justify-center px-6 py-12">
       <div className="w-full max-w-7xl grid md:grid-cols-2 gap-12 items-center bg-white rounded-3xl shadow-2xl overflow-hidden">
-        
         {/* ===== LEFT SIDE – Register Form ===== */}
         <div className="p-10 md:p-16 order-2 md:order-1">
           <div className="max-w-md mx-auto">
@@ -93,7 +107,10 @@ export default function RegisterPage() {
 
             <p className="text-center text-sm text-gray-600 mt-8">
               Already have an account?{" "}
-              <a href="/login" className="text-orange-600 font-bold hover:underline">
+              <a
+                href="/login"
+                className="text-orange-600 font-bold hover:underline"
+              >
                 Log in
               </a>
             </p>
@@ -114,13 +131,14 @@ export default function RegisterPage() {
           </div>
 
           <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-6">
-            Join With<br />
+            Join With
+            <br />
             <span className="text-orange-600">Flavor Vault</span>
           </h1>
 
           <p className="text-xl md:text-2xl opacity-95 leading-relaxed">
-            Save your favorite recipes, share your own creations,
-            and connect with food lovers around the world.
+            Save your favorite recipes, share your own creations, and connect
+            with food lovers around the world.
           </p>
 
           <div className="mt-10 flex items-center gap-4">

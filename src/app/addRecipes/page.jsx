@@ -3,6 +3,7 @@
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 export default function AddRecipeForm() {
   const router = useRouter();
@@ -57,11 +58,30 @@ export default function AddRecipeForm() {
       if (res.ok) {
         reset();
         router.push("/recipes");
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Recipe Added Successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } else {
-        alert("Failed to add recipe");
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Failed to add recipe",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (err) {
-      alert("Error: " + err.message);
+      Swal.fire({
+          position: "center",
+          icon: "error",
+          title: err.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
     }
   };
 

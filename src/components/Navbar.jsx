@@ -5,18 +5,46 @@ import Button from "./Button";
 import { useSession, signOut } from "next-auth/react";
 import { useState } from "react";
 import { Menu, X, ChevronDown, LogOut, ChefHat } from "lucide-react";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const { data: session } = useSession();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const router = useRouter()
 
   const user = session?.user;
+
+  const handleLogOut = () => {
+    
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        signOut();
+        setProfileOpen(false);
+        router.push('/')
+        Swal.fire({
+          title: "Loged Out",
+          text: "Loged Out Successfully",
+          icon: "success",
+          showConfirmButton: false
+        });
+      }
+    });
+    
+  };
 
   return (
     <nav className="bg-white/15 backdrop-blur-xl shadow-md sticky top-0 z-50">
       <div className="px-6 py-1 mx-auto w-11/12 flex items-center justify-between">
-
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <Image
@@ -30,9 +58,15 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-10 text-orange-600 font-medium">
-          <Link href="/" className="hover:text-orange-700 transition">Home</Link>
-          <Link href="/recipes" className="hover:text-orange-700 transition">Recipes</Link>
-          <Link href="/addRecipes" className="hover:text-orange-700 transition">Add Recipes</Link>
+          <Link href="/" className="hover:text-orange-700 transition">
+            Home
+          </Link>
+          <Link href="/recipes" className="hover:text-orange-700 transition">
+            Recipes
+          </Link>
+          <Link href="/addRecipes" className="hover:text-orange-700 transition">
+            Add Recipes
+          </Link>
 
           {/* drop dowwn  */}
           {session ? (
@@ -56,11 +90,15 @@ const Navbar = () => {
                   </div>
                 )}
 
-                
                 <span className="font-semibold text-gray-800">
                   {user?.name || user?.email?.split("@")[0]}
                 </span>
-                <ChevronDown size={20} className={`text-gray-600 transition ${profileOpen ? "rotate-180" : ""}`} />
+                <ChevronDown
+                  size={20}
+                  className={`text-gray-600 transition ${
+                    profileOpen ? "rotate-180" : ""
+                  }`}
+                />
               </button>
 
               {/* Dropdown Menu */}
@@ -76,10 +114,7 @@ const Navbar = () => {
                   </Link>
 
                   <button
-                    onClick={() => {
-                      signOut();
-                      setProfileOpen(false);
-                    }}
+                    onClick={handleLogOut}
                     className="flex items-center gap-4 px-6 py-3 hover:bg-red-50 text-gray-800 w-full text-left transition"
                   >
                     <LogOut size={20} className="text-red-600" />
@@ -116,22 +151,48 @@ const Navbar = () => {
       {mobileMenuOpen && (
         <div className="md:hidden bg-white border-t border-gray-200">
           <div className="px-6 py-6 space-y-5 text-orange-600 font-medium">
-            <Link href="/" onClick={() => setMobileMenuOpen(false)} className="block py-3">Home</Link>
-            <Link href="/recipes" onClick={() => setMobileMenuOpen(false)} className="block py-3">Recipes</Link>
-            <Link href="/addRecipes" onClick={() => setMobileMenuOpen(false)} className="block py-3">Add Recipes</Link>
+            <Link
+              href="/"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-3"
+            >
+              Home
+            </Link>
+            <Link
+              href="/recipes"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-3"
+            >
+              Recipes
+            </Link>
+            <Link
+              href="/addRecipes"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-3"
+            >
+              Add Recipes
+            </Link>
 
             {session ? (
               <>
                 <div className="pt-4 border-t border-gray-200">
                   <div className="flex items-center gap-4 mb-4">
                     {user?.image ? (
-                      <Image src={user.image} alt="profile" width={50} height={50} className="rounded-full" />
+                      <Image
+                        src={user.image}
+                        alt="profile"
+                        width={50}
+                        height={50}
+                        className="rounded-full"
+                      />
                     ) : (
                       <div className="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold">
                         {user?.name?.[0] || "U"}
                       </div>
                     )}
-                    <span className="font-bold text-gray-800">{user?.name || user?.email}</span>
+                    <span className="font-bold text-gray-800">
+                      {user?.name || user?.email}
+                    </span>
                   </div>
 
                   <Link
@@ -143,7 +204,7 @@ const Navbar = () => {
                   </Link>
 
                   <button
-                    onClick={() => signOut()}
+                    onClick={handleLogOut}
                     className="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-full font-medium mt-3"
                   >
                     Logout
@@ -156,7 +217,9 @@ const Navbar = () => {
                   <Button className="w-full rounded-full py-3">Log In</Button>
                 </Link>
                 <Link href="/register" onClick={() => setMobileMenuOpen(false)}>
-                  <Button className="w-full rounded-full py-3 bg-orange-600">Register</Button>
+                  <Button className="w-full rounded-full py-3 bg-orange-600">
+                    Register
+                  </Button>
                 </Link>
               </>
             )}

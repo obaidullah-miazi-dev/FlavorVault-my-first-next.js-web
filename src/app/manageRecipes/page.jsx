@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Clock, Users, Flame } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
+import Swal from "sweetalert2";
 
 export default function ManageRecipesPage() {
   const { data: session } = useSession();
@@ -21,20 +22,45 @@ export default function ManageRecipesPage() {
     enabled: !!session?.user?.email,
   });
 
-  const handleDelete = async (id) => {
-    const res = await fetch(
-      `https://flavorvault-server.vercel.app/deleteRecipe/${id}`,
-      {
-        method: "DELETE",
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await fetch(
+          `https://flavorvault-server.vercel.app/deleteRecipe/${id}`,
+          {
+            method: "DELETE",
+          }
+        );
+
+        if (res.ok) {
+          refetch();
+          Swal.fire({
+            position: "center",
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            showConfirmButton: false,
+            icon: "success",
+            timer: 1500,
+          });
+        } else {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "operation failed",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
       }
-    );
-    console.log(res.ok);
-    if (res.ok) {
-      refetch();
-      alert("deleted successfully");
-    } else {
-      alert("operation failed");
-    }
+    });
   };
 
   if (!session) {

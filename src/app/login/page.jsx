@@ -3,31 +3,44 @@
 import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import Swal from "sweetalert2";
 
 export default function LoginPage() {
   const { data: session } = useSession();
   async function handleLogin(e) {
-  e.preventDefault();
+    e.preventDefault();
 
-  const email = e.target.email.value;
-  const password = e.target.password.value;
-  const result = await signIn("credentials", {
-    redirect: false,
-    email,
-    password,
-  });
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const result = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+    });
 
-  if (result?.error) {
-    alert("Login failed: " + result.error);
-  } else if (result?.ok) {
-    alert('login successfull')
-    window.location.href = "/recipes";
+    if (result?.error) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Login failed: " + result.error,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } else if (result?.ok) {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Loged In successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      window.location.href = "/recipes";
+    }
   }
-}
 
-if(session){
-    redirect('/')
-}
+  if (session) {
+    redirect("/");
+  }
 
   return (
     <div className="min-h-screen  flex items-center justify-center px-6 py-12">
