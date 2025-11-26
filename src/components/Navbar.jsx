@@ -14,8 +14,8 @@ const Navbar = () => {
   const user = session?.user;
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
-      <div className="px-6 py-4 mx-auto w-11/12 flex items-center justify-between">
+    <nav className="bg-white/15 backdrop-blur-xl shadow-md sticky top-0 z-50">
+      <div className="px-6 py-1 mx-auto w-11/12 flex items-center justify-between">
 
         {/* Logo */}
         <Link href="/" className="flex items-center">
