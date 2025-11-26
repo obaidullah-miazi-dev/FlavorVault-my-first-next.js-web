@@ -25,7 +25,7 @@ const Navbar = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Yes, Log Out",
     }).then((result) => {
       if (result.isConfirmed) {
         signOut();
@@ -43,7 +43,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white/15 backdrop-blur-xl shadow-md sticky top-0 z-50">
+    <nav className="md:bg-white/15 bg-white backdrop-blur-xl shadow-md sticky top-0 z-50">
       <div className="px-6 py-1 mx-auto w-11/12 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center">
@@ -214,7 +214,7 @@ const Navbar = () => {
             ) : (
               <>
                 <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
-                  <Button className="w-full rounded-full py-3">Log In</Button>
+                  <Button className="w-full rounded-full py-3 my-3">Log In</Button>
                 </Link>
                 <Link href="/register" onClick={() => setMobileMenuOpen(false)}>
                   <Button className="w-full rounded-full py-3 bg-orange-600">

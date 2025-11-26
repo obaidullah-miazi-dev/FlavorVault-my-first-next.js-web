@@ -46,9 +46,9 @@ export default function LoginPage() {
     <div className="min-h-screen  flex items-center justify-center px-6 py-12">
       <div className="w-full max-w-7xl grid md:grid-cols-2 gap-12 items-center bg-white rounded-3xl shadow-2xl overflow-hidden">
         {/* logo and texts */}
-        <div className="bg-white p-12 md:p-16 flex flex-col justify-center h-2/3 border-r-2 border-orange-600">
+        <div className="bg-white p-12 md:p-16 flex flex-col justify-center h-2/3 md:border-r-2 md:border-orange-600">
           {/* logo  */}
-          <div className="mb-10">
+          <div className="mb-10 mx-auto">
             <Image
               src="/images/Logo.png"
               alt="Recipes Logo"
@@ -58,13 +58,13 @@ export default function LoginPage() {
             />
           </div>
 
-          <h1 className="text-5xl  font-bold leading-tight mb-6">
+          <h1 className="text-5xl text-center md:text-left font-bold leading-tight mb-6">
             Welcome Back to,
             <br />
             <span className="text-orange-600">Flavor Vault</span>
           </h1>
 
-          <p className="text-xl md:text-2xl opacity-95 leading-relaxed">
+          <p className="text-xl md:text-2xl md:text-left text-center opacity-95 leading-relaxed">
             Discover thousands of delicious recipes, save your favorites, and
             share your own culinary creations.
           </p>

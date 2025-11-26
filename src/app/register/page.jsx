@@ -47,7 +47,7 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-6 py-12">
-      <div className="w-full max-w-7xl grid md:grid-cols-2 gap-12 items-center bg-white rounded-3xl shadow-2xl overflow-hidden">
+      <div className="w-full max-w-7xl grid md:grid-cols-2 md:gap-12 items-center bg-white rounded-3xl shadow-2xl overflow-hidden">
         {/* ===== LEFT SIDE – Register Form ===== */}
         <div className="p-10 md:p-16 order-2 md:order-1">
           <div className="max-w-md mx-auto">
@@ -118,9 +118,9 @@ export default function RegisterPage() {
         </div>
 
         {/* register form */}
-        <div className="p-12 md:p-16 flex flex-col justify-center h-2/3 order-1 md:order-2 border-l-2 border-orange-600 ">
+        <div className="p-12 md:p-16 flex flex-col justify-center h-2/3 order-1 md:order-2 md:border-l-2 md:border-orange-600">
           {/* Logo */}
-          <div className="mb-10">
+          <div className="mb-10 mx-auto">
             <Image
               src="/images/logo.png"
               alt="Recipes Logo"
@@ -130,19 +130,19 @@ export default function RegisterPage() {
             />
           </div>
 
-          <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-6">
+          <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-6 md:text-left text-center">
             Join With
             <br />
             <span className="text-orange-600">Flavor Vault</span>
           </h1>
 
-          <p className="text-xl md:text-2xl opacity-95 leading-relaxed">
+          <p className="text-xl md:text-2xl opacity-95 leading-relaxed text-center md:text-left">
             Save your favorite recipes, share your own creations, and connect
             with food lovers around the world.
           </p>
 
           <div className="mt-10 flex items-center gap-4">
-            <span className="text-lg">Start cooking with passion</span>
+            <span className="text-lg md:block hidden">Start cooking with passion</span>
             <div className="w-16 h-1 bg-white/40 rounded-full"></div>
           </div>
         </div>
