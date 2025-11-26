@@ -1,7 +1,13 @@
 import RecipeCard from "@/components/RecipeCard";
+import SearchBox from "@/components/SearchBox";
 
-const Recipes = async () => {
-  const res = await fetch("https://flavorvault-server.vercel.app/recipes", {
+const Recipes = async ({ searchParams }) => {
+  const params = await searchParams;
+
+  const search = params?.search || "";
+
+  // console.log("Search:", search);
+  const res = await fetch(`https://flavorvault-server.vercel.app/recipes?search=${search}`, {
     cache: "no-store",
   });
   const recipes = await res.json();
@@ -18,6 +24,8 @@ const Recipes = async () => {
             Thousands of tried-and-tested recipes, from quick weeknight dinners
             to show-stopping desserts.
           </p>
+
+          <SearchBox defaultValue={search} />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
