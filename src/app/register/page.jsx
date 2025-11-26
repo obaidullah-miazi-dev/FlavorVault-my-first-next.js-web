@@ -122,7 +122,7 @@ export default function RegisterPage() {
           {/* Logo */}
           <div className="mb-10 mx-auto">
             <Image
-              src="/images/logo.png"
+              src="/images/Logo.png"
               alt="Recipes Logo"
               width={180}
               height={180}
