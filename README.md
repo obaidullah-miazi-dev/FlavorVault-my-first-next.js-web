@@ -1,6 +1,6 @@
 # RecipeHub — Your Community Recipe App
 
-A beautiful, modern, and fully responsive **recipe sharing platform** built with **Next.js 14 (App Router)**, **Tailwind CSS**, and love for food!
+A beautiful, modern, and fully responsive **recipe sharing platform** built with **Next.js 16 (App Router)**, **Tailwind CSS**, and love for food!
 
 Live Demo: [Live Link](https://flavor-vault-my-first-next-js-web.vercel.app/)
 
@@ -21,19 +21,19 @@ Live Demo: [Live Link](https://flavor-vault-my-first-next-js-web.vercel.app/)
 
 ### Tech Stack
 
-- **Framework**: Next.js 14 (App Router + Server Components)
+- **Framework**: Next.js 16 (App Router + Server Components)
 - **Styling**: Tailwind CSS
 - **Authentication**: NextAuth.js (Google + Credentials)
-- **Backend**: Node.js + Express (running on `http://localhost:4000`)
+- **Backend**: Node.js + Express (running on `vercel`)
 - **Database**: MongoDB
 - **Icons**: Lucide React
-- **Deployment**: Ready for Vercel
+- **Deployment**: Vercel
 
 ---
 
 ### Project Structure
 
-├── app/ # Next.js 14 App Router
+├── app/ # Next.js 16 App Router
 │ ├── recipes/ # All recipes page
 │ ├── addRecipes/ # Add new recipe form
 │ ├── manageRecipes/ # User's own recipes (edit/delete)
