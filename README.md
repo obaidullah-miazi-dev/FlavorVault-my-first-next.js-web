@@ -2,7 +2,7 @@
 
 A beautiful, modern, and fully responsive **recipe sharing platform** built with **Next.js 16 (App Router)**, **Tailwind CSS**, and love for food!
 
-Live Demo: [Live Link](https://flavor-vault-my-first-next-js-web.vercel.app/)
+Live Demo: [Flavor Vault](https://flavor-vault-my-first-next-js-web.vercel.app/)
 
 ---
 
@@ -33,6 +33,7 @@ Live Demo: [Live Link](https://flavor-vault-my-first-next-js-web.vercel.app/)
 
 ### Project Structure
 
+```bash
 ├── app/ # Next.js 16 App Router
 │ ├── recipes/ # All recipes page
 │ ├── addRecipes/ # Add new recipe form
@@ -51,17 +52,16 @@ Live Demo: [Live Link](https://flavor-vault-my-first-next-js-web.vercel.app/)
 │ └── Footer.jsx
 ├── public/ # Images, logo, etc.
 └── backend/ # Express.js server (port 4000)
-text---
+```
 
 ### How to Run Locally
 
 1. **Start the backend (Express + MongoDB)**
-   ```bash
-   cd backend
-   npm install
-   npm run dev
-   → Runs on http://localhost:4000
-   ```
+```bash
+cd backend
+npm install
+npm run dev
+→ Runs on http://localhost:4000
 
 Start the frontend (Next.js)Bashcd frontend # or root if you're in the Next.js folder
 npm install
@@ -71,6 +71,8 @@ NEXTAUTH_URL=http://localhost:3000
 GOOGLE_CLIENT_ID=your-google-id
 GOOGLE_CLIENT_SECRET=your-google-secret
 MONGODB_URI=mongodb://127.0.0.1:27017/recipehub
+
+```
 
 Contributing
 We welcome contributions! Feel free to:

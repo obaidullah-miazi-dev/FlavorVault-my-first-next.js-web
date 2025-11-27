@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import { useSession } from "next-auth/react";
 
 export default function AddRecipeForm() {
   const router = useRouter();
@@ -11,6 +12,7 @@ export default function AddRecipeForm() {
   const [instructionInput, setInstructionInput] = useState("");
   const [ingredients, setIngredients] = useState([]);
   const [ingredientInput, setIngredientInput] = useState("");
+  const {data: session} = useSession()
 
   const addInstruction = (e) => {
     e.preventDefault();
@@ -154,6 +156,7 @@ export default function AddRecipeForm() {
             <input
               {...register("image", { required: true })}
               type="url"
+              defaultValue={session?.user?.photoURL}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 outline-none focus:ring-orange-500"
               placeholder="https://images.unsplash.com/..."
             />
@@ -170,6 +173,7 @@ export default function AddRecipeForm() {
             <input
               {...register("recipeMakerName", { required: true })}
               type="text"
+              defaultValue={session?.user?.name}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 outline-none focus:ring-orange-500"
               placeholder="Your Name"
             />
@@ -185,6 +189,7 @@ export default function AddRecipeForm() {
             <input
               {...register("recipeMakerEmail", { required: true })}
               type="email"
+              defaultValue={session?.user?.email}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 outline-none focus:ring-orange-500"
               placeholder="Your Email"
             />
