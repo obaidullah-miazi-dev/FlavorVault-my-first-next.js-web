@@ -8,6 +8,9 @@ import React from 'react';
 export const metadata = {
   title: "Flavorvault",
   description: "Recipes collection website",
+  icons: {
+    icon: "/Logo.png",
+  },
 };
 
 const page = () => {
