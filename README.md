@@ -1,38 +1,41 @@
-# RecipeHub — Your Community Recipe App
+# FlavorVault 
 
-A beautiful, modern, and fully responsive **recipe sharing platform** built with **Next.js 16 (App Router)**, **Tailwind CSS**, and love for food!
+A modern, fully responsive recipe sharing platform built with Next.js, Tailwind CSS, Node.js + Express, and MongoDB.
 
-Live Demo: [Flavor Vault](https://flavor-vault-my-first-next-js-web.vercel.app/)
+## 🔗 Live Demo
 
----
-
-### Features
-
-- Browse thousands of community-submitted recipes
-- Add, edit, and delete your own recipes
-- Search recipes instantly (with live search)
-- Responsive design — works perfectly on mobile & desktop
-- Google Login + Email/Password authentication (via NextAuth.js)
-- Clean, modern UI with orange-themed design
-- Recently added & featured recipe sections
-- Newsletter signup, testimonials, and more!
+[https://flavor-vault-my-first-next-js-web.vercel.app](https://flavor-vault-my-first-next-js-web.vercel.app)
 
 ---
 
-### Tech Stack
+## 🧑‍💻 Features
 
-- **Framework**: Next.js 16 (App Router + Server Components)
-- **Styling**: Tailwind CSS
-- **Authentication**: NextAuth.js (Google + Credentials)
-- **Backend**: Node.js + Express (running on `vercel`)
-- **Database**: MongoDB
-- **Icons**: Lucide React
-- **Deployment**: Vercel
+- Browse thousands of community-submitted recipes  
+- Add, edit, and delete your own recipes  
+- Instant search with live filter/search feature  
+- Responsive design — works on mobile & desktop  
+- Authentication (Google login + Email/Password) via NextAuth.js  
+- Clean, modern UI with an orange-themed design  
+- Sections for Recently Added & Featured Recipes  
+- Newsletter signup, testimonials and more!
 
 ---
 
-### Project Structure
+## 🛠️ Tech Stack
 
+- **Frontend:** Next.js (App Router + Server Components) + Tailwind CSS  
+- **Authentication:** NextAuth.js (Google + Credentials)  
+- **Backend:** Express.js (Node.js)  
+- **Database:** MongoDB  
+- **Icons:** Lucide React  
+- **Deployment:** Vercel  
+
+---
+
+![Screenshot of FlavorVault Homepage](/public/images/flavor-vault-full-home.png)
+
+
+## 📁 Project Structure
 ```bash
 ├── app/ # Next.js 16 App Router
 │ ├── recipes/ # All recipes page
@@ -50,39 +53,85 @@ Live Demo: [Flavor Vault](https://flavor-vault-my-first-next-js-web.vercel.app/)
 │ ├── TestimonialSection.jsx
 │ ├── NewsletterSection.jsx
 │ └── Footer.jsx
-├── public/ # Images, logo, etc.
-└── backend/ # Express.js server (port 4000)
+├── public/ # Static assets: images, logos, etc.
+└── backend/ # Express.js server (API, DB connection)
+
+yaml
+Copy code
+
 ```
 
-### How to Run Locally
+## 🚀 Getting Started (Local Development)
 
-1. **Start the backend (Express + MongoDB)**
+### Prerequisites
+
+- Node.js and npm installed  
+- A running MongoDB instance (local or remote)  
+- Environment variables (see below)  
+
+### Installation & Running
+
 ```bash
+1. Clone the repo  
+git clone https://github.com/obaidullah-miazi-dev/FlavorVault-my-first-next.js-web.git
+cd FlavorVault-my-first-next.js-web
+Setup backend
+
+bash
+Copy code
 cd backend
 npm install
 npm run dev
-→ Runs on http://localhost:4000
+Backend will run at: http://localhost:4000
 
-Start the frontend (Next.js)Bashcd frontend # or root if you're in the Next.js folder
+Setup frontend
+
+bash
+Copy code
+cd ../    # or to frontend if you have separate folder
 npm install
-npm run dev→ Open http://localhost:3000
-Environment Variables (create .env.local in root)envNEXTAUTH_SECRET=your-secret-here
-NEXTAUTH_URL=http://localhost:3000
-GOOGLE_CLIENT_ID=your-google-id
-GOOGLE_CLIENT_SECRET=your-google-secret
-MONGODB_URI=mongodb://127.0.0.1:27017/recipehub
+npm run dev
+Frontend will run at: http://localhost:3000
+
+Create a .env.local file in root with the following (example):
+
+env
+Copy code
+NEXTAUTH_SECRET=your-secret-here  
+NEXTAUTH_URL=http://localhost:3000  
+GOOGLE_CLIENT_ID=your-google-client-id  
+GOOGLE_CLIENT_SECRET=your-google-client-secret  
+MONGODB_URI=mongodb://127.0.0.1:27017/flavorvault  
 
 ```
 
-Contributing
-We welcome contributions! Feel free to:
+🙌 Contributing
+Contributions are welcome! If you’d like to:
 
-Submit new recipes
+Add new recipes
+
 Fix bugs
+
 Improve UI/UX
-Add new features (filters, categories, likes, etc.)
 
-Just fork, create a branch, and open a Pull Request!
+Add new features (e.g. filters, categories, likes, comments)
 
-License
-MIT © 2025 RecipeHub — Free to use, modify, and share.
+Then please:
+
+Fork the repository
+
+Create your feature branch
+
+Commit your changes
+
+Push to the branch
+
+Open a Pull Request
+
+Your improvements are much appreciated!
+
+📄 License
+MIT © 2025 — Feel free to use, modify, and share.
+
+📝 Acknowledgements
+Thanks to all the libraries and tools that made this project possible — Next.js, Tailwind CSS, Express.js, MongoDB, NextAuth.js, and Lucide React.
