@@ -15,7 +15,7 @@ const RecipeCard = ({ recipe }) => {
 
   return (
     <div className="group block">
-      <div className="relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform  bg-white">
+      <div className="relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform  bg-white h-full">
         {/* Image with overlay */}
         <div className="relative aspect-4/3 overflow-hidden">
           <Image
@@ -72,9 +72,11 @@ const RecipeCard = ({ recipe }) => {
           </div>
 
           {/* button */}
-          <Link href={`/recipes/${recipe._id}`}>
+          <div>
+            <Link href={`/recipes/${recipe._id}`}>
             <Button className={`rounded-full`}>View Recipe</Button>
           </Link>
+          </div>
         </div>
       </div>
     </div>
